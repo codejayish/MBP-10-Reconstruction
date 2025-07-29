@@ -14,10 +14,6 @@ To compile the project, run:
 ```bash
 make all
 ```
-To execute the program with input data (mbo.csv), run:
-```bash
-make run
-```
 
 This will create an executable file named `reconstruction_gemini`. The `-O3` and `-march=native` flags are used to ensure the compiler generates highly optimized machine code.
 
@@ -25,6 +21,11 @@ This will create an executable file named `reconstruction_gemini`. The `-O3` and
 
 To run the program, use the following command, passing the input MBO file as an argument:
 
+To execute the program with input data (mbo.csv), run:
+```bash
+make run
+```
+or else we can also run this command from project root directory
 ```bash
 ./reconstruction_gemini mbo.csv
 ```
