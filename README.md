@@ -10,7 +10,14 @@ The implementation prioritizes high performance (speed), low memory usage, and c
 
 A `Makefile` is provided for easy compilation. With a C++ compiler like `g++` and `make` installed, navigate to the project directory and run:
 
-make
+To compile the project, run:
+```bash
+make all
+```
+To execute the program with input data (mbo.csv), run:
+```bash
+make run
+```
 
 This will create an executable file named `reconstruction_gemini`. The `-O3` and `-march=native` flags are used to ensure the compiler generates highly optimized machine code.
 
@@ -18,7 +25,9 @@ This will create an executable file named `reconstruction_gemini`. The `-O3` and
 
 To run the program, use the following command, passing the input MBO file as an argument:
 
+```bash
 ./reconstruction_gemini mbo.csv
+```
 
 The program will process the input file and generate an output file named `mbp.csv` in the same directory. A confirmation message will be printed to the console upon completion.
 
