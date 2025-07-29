@@ -7,12 +7,12 @@
 #include <unordered_map>
 #include <iomanip>
 #include <functional>
+#include <cstdint> 
 
-// --- Configuration ---
+
 constexpr int MBP_LEVELS = 10;
 constexpr int64_t PRICE_SCALE = 10000;
 
-// --- Data Structures ---
 
 struct PriceLevel {
     uint64_t size = 0;
@@ -40,7 +40,7 @@ class OrderBook {
 private:
     std::map<int64_t, PriceLevel, std::greater<int64_t>> bids;
     std::map<int64_t, PriceLevel> asks;
-    std::unordered_map<uint64_t, std::pair<int64_t, uint64_t>> order_map; // order_id -> {price, original_size}
+    std::unordered_map<uint64_t, std::pair<int64_t, uint64_t>> order_map; 
 
 public:
     void clear() {
@@ -49,7 +49,6 @@ public:
         order_map.clear();
     }
 
-    // CORRECTED FUNCTION
     void add_order(const MBOEvent& event) {
         order_map[event.order_id] = {event.price, event.size};
         if (event.side == 'B') {
@@ -61,7 +60,6 @@ public:
         }
     }
 
-    // CORRECTED FUNCTION
     void cancel_order(const MBOEvent& event) {
         auto it = order_map.find(event.order_id);
         if (it == order_map.end()) return;
@@ -152,7 +150,7 @@ void write_mbp_row(std::ofstream& out, const MBOEvent& event, int row_index, con
     std::vector<std::pair<int64_t, PriceLevel>> top_bids, top_asks;
     book.get_top_levels(top_bids, top_asks);
 
-    for (int i = 0; i < MBP_LEVELS; ++i) {
+    for (std::size_t i = 0; i < MBP_LEVELS; ++i) {
         if (i < top_bids.size()) {
             out << ',' << std::fixed << std::setprecision(4) << static_cast<double>(top_bids[i].first) / PRICE_SCALE
                 << ',' << top_bids[i].second.size << ',' << top_bids[i].second.count;
@@ -183,7 +181,7 @@ bool parse_line(const std::string& line, MBOEvent& event) {
         std::getline(ss, token, ',');
         event.price = token.empty() ? 0 : static_cast<int64_t>(std::stod(token) * PRICE_SCALE);
         std::getline(ss, token, ','); event.size = std::stoull(token);
-        std::getline(ss, token, ','); // channel_id (ignored)
+        std::getline(ss, token, ','); 
         std::getline(ss, token, ','); event.order_id = std::stoull(token);
         std::getline(ss, token, ','); event.flags = std::stoi(token);
         std::getline(ss, token, ','); event.ts_in_delta = std::stoll(token);
