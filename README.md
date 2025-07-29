@@ -1,6 +1,4 @@
-============================================================
- Blockhouse Quant Dev Work Trial: MBP-10 Reconstruction
-============================================================
+# Blockhouse Quant Dev Work Trial: MBP-10 Reconstruction
 
 ## 1. Overview
 
