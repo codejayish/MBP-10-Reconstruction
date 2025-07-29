@@ -119,11 +119,11 @@ make perf_test
 ```text
 --- Performance Test ---
 Processed 1000000 add operations.
-Total time: 142474 microseconds.
-Average time per operation: 0.142474 microseconds.
+Total time: 133088 microseconds.
+Average time per operation: 0.133088 microseconds.
 ```
 
 
 ###  Conclusion
 
-With ~142 nanoseconds per operation, the engine demonstrates exceptional speed, fulfilling HFT-grade performance requirements.
+With ~133 nanoseconds per operation, the engine demonstrates exceptional speed, fulfilling HFT-grade performance requirements.
