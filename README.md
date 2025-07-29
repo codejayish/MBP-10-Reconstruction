@@ -40,3 +40,80 @@ Floating-point numbers (`double`, `float`) are avoided for price representation 
 ### d. Efficient I/O
 - `std::ios_base::sync_with_stdio(false)` and `std::cin.tie(NULL)` are used to decouple C++ streams from C standard streams, providing a significant speed boost for I/O operations.
 - A robust `stringstream`-based parser is used to correctly handle the specific CSV format, including string-based timestamps and empty fields.
+
+
+##  Project Testing & Validation
+
+This document outlines the **correctness** and **performance** tests included with the project.
+
+---
+
+###  Correctness: Unit Tests
+
+Unit tests are implemented using the **Google Test** framework to validate the core `OrderBook` logic. These tests ensure that operations such as order addition and cancellation update the book state accurately.
+
+####  Build Tests
+
+```bash
+make test
+```
+
+##  Run Tests
+
+To validate the correctness of the order book implementation:
+
+```bash
+./orderbook_tester
+```
+
+---
+
+##  Unit Testing
+
+Google Test is used to validate the logical integrity of the order book operations.
+
+###  Results
+
+```text
+Running main() from googletest/src/gtest_main.cc
+[==========] Running 2 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 2 tests from OrderBookTest
+[ RUN      ] OrderBookTest.AddSingleBid
+[       OK ] OrderBookTest.AddSingleBid (0 ms)
+[ RUN      ] OrderBookTest.FullCancelRemovesLevel
+[       OK ] OrderBookTest.FullCancelRemovesLevel (0 ms)
+[----------] 2 tests from OrderBookTest (0 ms total)
+[==========] 2 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 2 tests.
+```
+
+##  Performance Benchmark
+
+A micro-benchmark evaluates the system’s latency per event under load.
+
+###  Build Benchmark
+
+```bash
+make perf_test
+```
+
+###  Run Benchmark
+
+```bash
+./perf_tester
+```
+
+###  Results
+
+```text
+--- Performance Test ---
+Processed 1000000 add operations.
+Total time: 142474 microseconds.
+Average time per operation: 0.142474 microseconds.
+```
+
+
+###  Conclusion
+
+With ~142 nanoseconds per operation, the engine demonstrates exceptional speed, fulfilling HFT-grade performance requirements.

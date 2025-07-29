@@ -197,7 +197,7 @@ bool parse_line(const std::string& line, MBOEvent& event) {
     }
     return true;
 }
-
+#ifndef TESTING_ENABLED
 int main(int argc, char* argv[]) {
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
@@ -242,3 +242,4 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
+#endif
